@@ -17,6 +17,7 @@ public class Result {
         result.code = 1;
         result.msg = "success";
         return result;
+
     }
 
     public static Result success(Object object) {
