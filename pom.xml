@@ -37,6 +37,16 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>com.qk</groupId>
+                <artifactId>qk-common</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.qk</groupId>
+                <artifactId>qk-entity</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis-spring-boot-starter.version}</version>

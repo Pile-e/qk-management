@@ -28,6 +28,16 @@
         <java.version>17</java.version>
     </properties>
     <dependencies>
+        <!--公共依赖-->
+        <dependency>
+            <groupId>com.qk</groupId>
+            <artifactId>qk-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.qk</groupId>
+            <artifactId>qk-entity</artifactId>
+        </dependency>
+        <!--依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
