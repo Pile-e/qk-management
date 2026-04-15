@@ -84,4 +84,10 @@ public class DeptServiceImpl implements DeptService {
     public void deleteDeptById(Integer id) {
         deptMapper.deleteDeptById(id);
     }
+
+    @Override
+    public List<Dept> selectAllDept() {
+        List<Dept> list = deptMapper.selectAllDept();
+        return list;
+    }
 }

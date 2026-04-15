@@ -36,4 +36,7 @@ public interface DeptMapper {
 
     @Delete("delete from dept where id=#{id}")
     void deleteDeptById(Integer id);
+
+    @Select("select id, name, status, create_time, update_time from dept")
+    List<Dept> selectAllDept();
 }

@@ -5,9 +5,13 @@ import com.qk.common.Result;
 import com.qk.entity.Dept;
 import com.qk.mapper.DeptMapper;
 import com.qk.service.DeptService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@Slf4j
 @RestController
 public class DeptController {
     @Autowired
@@ -75,6 +79,15 @@ public class DeptController {
     public Result deleteDeptById(@PathVariable Integer id) {
         deptService.deleteDeptById(id);
         return Result.success();
+    }
+
+    /**
+     *
+     */
+    @GetMapping("depts/list")
+    public Result selectAllDept() {
+        List<Dept> list = deptService.selectAllDept();
+        return Result.success(list);
     }
 
 }

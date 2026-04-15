@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qk.mapper.CourseMapper">
+    <update id="updateCourse">
+        update course
+        <set>
+            <if test="name != null and name !=''">
+                name=#{name},
+            </if>
+            <if test="description != null and description !=''">
+                description=#{description},
+            </if>
+            <if test="subject != null">
+                subject=#{subject},
+            </if>
+            <if test="price != null">
+                price=#{price},
+            </if>
+            <if test="target != null">
+                target=#{target},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <select id="courseList" resultType="com.qk.entity.Course">
+        select id, subject, name, price, target, description, create_time, update_time from course
+        <where>
+            <if test="name!= null and name !=''">
+                name=#{name}
+            </if>
+            <if test="subject != null and subject !=''">
+                and subject=#{subject}
+            </if>
+            <if test="target !=null and target !=''">
+                and target=#{target}
+            </if>
+        </where>
+    </select>
+</mapper>
