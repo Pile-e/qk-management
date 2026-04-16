@@ -55,4 +55,39 @@ public class UserServiceImpl implements UserService {
     public void deleteByIds(List<Integer> ids) {
         userMapper.deleteByIds(ids);
     }
+
+    /**
+     * 更新用户信息
+     *
+     * @param user
+     */
+    @Override
+    public void updateUser(User user) {
+        user.setUpdateTime(LocalDateTime.now());
+        userMapper.updateUser(user);
+    }
+
+    /**
+     * 根据id查询用户
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public User getById(Integer id) {
+        User user = userMapper.getById(id);
+        return user;
+    }
+
+    /**
+     * 根据角色查询用户
+     *
+     * @param roleLabel
+     * @return
+     */
+    @Override
+    public List<User> getByRole(String roleLabel) {
+        List<User> list = userMapper.getByRole(roleLabel);
+        return list;
+    }
 }

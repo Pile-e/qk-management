@@ -12,4 +12,10 @@ public interface UserService {
     void addUser(User user);
 
     void deleteByIds(List<Integer> ids);
+
+    void updateUser(User user);
+
+    User getById(Integer id);
+
+    List<User> getByRole(String roleLabel);
 }

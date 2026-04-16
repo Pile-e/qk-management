@@ -56,4 +56,40 @@ public class UserController {
         userService.deleteByIds(ids);
         return Result.success();
     }
+
+    /**
+     * 根据id查询用户
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    public Result getById(@PathVariable Integer id) {
+        User user = userService.getById(id);
+        return Result.success(user);
+    }
+
+    /**
+     * 更新用户信息
+     *
+     * @param user
+     * @return
+     */
+    @PutMapping
+    public Result updateUser(@RequestBody User user) {
+        userService.updateUser(user);
+        return Result.success();
+    }
+
+    /**
+     * 根据角色查询用户
+     *
+     * @param roleLabel
+     * @return
+     */
+    @GetMapping("/role/{roleLabel}")
+    public Result getByRole(@PathVariable String roleLabel) {
+        List<User> list = userService.getByRole(roleLabel);
+        return Result.success(list);
+    }
 }
