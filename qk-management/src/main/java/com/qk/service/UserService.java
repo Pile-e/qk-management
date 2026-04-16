@@ -4,6 +4,12 @@ import com.qk.common.PageResult;
 import com.qk.dto.UserDto;
 import com.qk.entity.User;
 
+import java.util.List;
+
 public interface UserService {
     PageResult<User> getUserList(UserDto userDto);
+
+    void addUser(User user);
+
+    void deleteByIds(List<Integer> ids);
 }

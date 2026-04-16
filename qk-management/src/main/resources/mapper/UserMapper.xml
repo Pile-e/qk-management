@@ -3,6 +3,14 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qk.mapper.UserMapper">
+    <delete id="deleteByIds">
+        delete
+        from user
+        where id in
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 
     <select id="getUserList" resultType="com.qk.entity.User">
         select u.*, d.name dept_name, r.name role_name

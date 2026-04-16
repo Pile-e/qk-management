@@ -4,11 +4,16 @@ target/
 !**/src/test/**/target/
 .kotlin
 
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
+# 本地配置文件（包含密钥）
+application.yml
+**/application.yml
+qk-management/src/main/resources/application.yml
 
 ### Eclipse ###
 .apt_generated
@@ -34,3 +39,5 @@ build/
 
 ### Mac OS ###
 .DS_Store
+qk-management/src/main/resources/application.yml
+qk-management/src/main/resources/application.yml
