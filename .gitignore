@@ -11,6 +11,10 @@ qk-management/src/main/resources/application.yml
 **/application.yml
 **/application.yaml
 
+
+log/
+*.log
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
