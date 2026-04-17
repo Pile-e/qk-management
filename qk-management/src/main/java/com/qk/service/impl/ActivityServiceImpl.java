@@ -71,4 +71,15 @@ public class ActivityServiceImpl implements ActivityService {
         Activity activity = activityMapper.getActById(id);
         return activity;
     }
+
+    /**
+     * 更新活动
+     *
+     * @param activity
+     */
+    @Override
+    public void updateAct(Activity activity) {
+        activity.setUpdateTime(LocalDateTime.now());
+        activityMapper.updateAct(activity);
+    }
 }

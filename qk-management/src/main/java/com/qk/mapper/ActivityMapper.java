@@ -46,4 +46,11 @@ public interface ActivityMapper {
      */
     @Select("select * from activity where id=#{id}")
     Activity getActById(Integer id);
+
+    /**
+     * 更新活动
+     *
+     * @param activity
+     */
+    void updateAct(Activity activity);
 }

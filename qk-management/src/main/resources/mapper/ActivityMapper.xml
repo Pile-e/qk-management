@@ -3,6 +3,39 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qk.mapper.ActivityMapper">
+    <update id="updateAct">
+        update activity
+        <set>
+            <if test="channel!=null">
+                channel=#{channel},
+            </if>
+            <if test="name!=null and name!=''">
+                name=#{name},
+            </if>
+            <if test="startTime!=null">
+                start_time=#{startTime},
+            </if>
+            <if test="endTime!=null">
+                end_time=#{endTime},
+            </if>
+            <if test="description!=null and description!=''">
+                description=#{description},
+            </if>
+            <if test="type!=null">
+                type=#{type},
+            </if>
+            <if test="discount!=null">
+                discount=#{discount},
+            </if>
+            <if test="voucher!=null">
+                voucher=#{voucher},
+            </if>
+            <if test="updateTime!=null">
+                update_time=#{updateTime}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
     <select id="activityList" resultType="com.qk.entity.Activity">
         select *
         from activity

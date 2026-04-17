@@ -72,4 +72,16 @@ public class ActivityController {
         Activity activity = activityService.getActById(id);
         return Result.success(activity);
     }
+
+    /**
+     * 更新活动
+     *
+     * @param activity
+     * @return
+     */
+    @PutMapping
+    public Result updateAct(@RequestBody Activity activity) {
+        activityService.updateAct(activity);
+        return Result.success();
+    }
 }

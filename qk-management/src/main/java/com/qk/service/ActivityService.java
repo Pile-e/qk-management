@@ -11,4 +11,6 @@ public interface ActivityService {
     void addAct(Activity activity);
 
     Activity getActById(Integer id);
+
+    void updateAct(Activity activity);
 }
