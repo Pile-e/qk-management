@@ -9,6 +9,7 @@ import com.qk.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -37,8 +38,25 @@ public class ActivityServiceImpl implements ActivityService {
         return new PageResult<>(activityPageInfo.getTotal(), activityPageInfo.getList());
     }
 
+    /**
+     * 根据id删除活动
+     *
+     * @param id
+     */
     @Override
     public void deleteActById(Integer id) {
         activityMapper.deleteActById(id);
+    }
+
+    /**
+     * 添加课程
+     *
+     * @param activity
+     */
+    @Override
+    public void addAct(Activity activity) {
+        activity.setCreateTime(LocalDateTime.now());
+        activity.setUpdateTime(LocalDateTime.now());
+        activityMapper.addAct(activity);
     }
 }

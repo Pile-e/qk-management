@@ -48,4 +48,16 @@ public class ActivityController {
         activityService.deleteActById(id);
         return Result.success();
     }
+
+    /**
+     * 添加课程
+     *
+     * @param activity
+     * @return
+     */
+    @PostMapping
+    public Result addAct(@RequestBody Activity activity) {
+        activityService.addAct(activity);
+        return Result.success();
+    }
 }

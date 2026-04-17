@@ -21,6 +21,9 @@
             <if test="target != null">
                 target=#{target},
             </if>
+            <if test="updateTime!=null">
+                update_time=#{updateTime}
+            </if>
         </set>
         where id=#{id}
     </update>
