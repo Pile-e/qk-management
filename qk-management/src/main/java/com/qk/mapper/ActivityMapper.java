@@ -53,4 +53,13 @@ public interface ActivityMapper {
      * @param activity
      */
     void updateAct(Activity activity);
+
+    /**
+     * 查询指定类型的活动
+     *
+     * @param type
+     * @return
+     */
+    @Select("select * from activity where type=#{type}")
+    List<Activity> getTypeAct(Integer type);
 }

@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/activities")
@@ -83,5 +85,17 @@ public class ActivityController {
     public Result updateAct(@RequestBody Activity activity) {
         activityService.updateAct(activity);
         return Result.success();
+    }
+
+    /**
+     * 查询指定类型的活动
+     *
+     * @param type
+     * @return
+     */
+    @GetMapping("/type/{type}")
+    public Result getTypeAct(@PathVariable Integer type) {
+        List<Activity> list = activityService.getTypeAct(type);
+        return Result.success(list);
     }
 }

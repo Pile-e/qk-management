@@ -82,4 +82,16 @@ public class ActivityServiceImpl implements ActivityService {
         activity.setUpdateTime(LocalDateTime.now());
         activityMapper.updateAct(activity);
     }
+
+    /**
+     * 查询指定类型的活动
+     *
+     * @param type
+     * @return
+     */
+    @Override
+    public List<Activity> getTypeAct(Integer type) {
+        List<Activity> list = activityMapper.getTypeAct(type);
+        return list;
+    }
 }
