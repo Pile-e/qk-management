@@ -4,6 +4,7 @@ import com.qk.entity.Activity;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -36,4 +37,13 @@ public interface ActivityMapper {
     @Insert("insert into activity(channel, name, start_time, end_time, description, type, discount, voucher, create_time, update_time) " +
             "values (#{channel},#{name},#{startTime},#{endTime},#{description},#{type},#{discount},#{voucher},#{createTime},#{updateTime})")
     void addAct(Activity activity);
+
+    /**
+     * 根据id查询用户
+     *
+     * @param id
+     * @return
+     */
+    @Select("select * from activity where id=#{id}")
+    Activity getActById(Integer id);
 }

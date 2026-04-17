@@ -9,4 +9,6 @@ public interface ActivityService {
     void deleteActById(Integer id);
 
     void addAct(Activity activity);
+
+    Activity getActById(Integer id);
 }

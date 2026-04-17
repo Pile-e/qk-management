@@ -60,4 +60,16 @@ public class ActivityController {
         activityService.addAct(activity);
         return Result.success();
     }
+
+    /**
+     * 根据id查询活动
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    public Result getActById(@PathVariable Integer id) {
+        Activity activity = activityService.getActById(id);
+        return Result.success(activity);
+    }
 }
