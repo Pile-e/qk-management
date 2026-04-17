@@ -36,4 +36,9 @@ public class ActivityServiceImpl implements ActivityService {
         PageInfo<Activity> activityPageInfo = new PageInfo<>(list);
         return new PageResult<>(activityPageInfo.getTotal(), activityPageInfo.getList());
     }
+
+    @Override
+    public void deleteActById(Integer id) {
+        activityMapper.deleteActById(id);
+    }
 }

@@ -6,10 +6,7 @@ import com.qk.entity.Activity;
 import com.qk.service.ActivityService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -38,5 +35,17 @@ public class ActivityController {
         log.info("接收参数 渠道来源：{},活动类型：{},状态：{},页码：{},每页记录数：{}", channel, type, status, page, pageSize);
         PageResult<Activity> pageResult = activityService.activityList(channel, type, status, page, pageSize);
         return Result.success(pageResult);
+    }
+
+    /**
+     * 根据id删除活动
+     *
+     * @param id
+     * @return
+     */
+    @DeleteMapping("/{id}")
+    public Result deleteActById(@PathVariable Integer id) {
+        activityService.deleteActById(id);
+        return Result.success();
     }
 }
