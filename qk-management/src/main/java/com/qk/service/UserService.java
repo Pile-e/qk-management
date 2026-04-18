@@ -3,6 +3,7 @@ package com.qk.service;
 import com.qk.common.PageResult;
 import com.qk.dto.UserDto;
 import com.qk.entity.User;
+import com.qk.vo.LoginResultVo;
 
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface UserService {
     User getById(Integer id);
 
     List<User> getByRole(String roleLabel);
+
+    LoginResultVo login(User user);
 }

@@ -60,4 +60,12 @@ public interface UserMapper {
 
     @Select("select * from user where role_id = (select id from role where label=#{roleLabel})")
     List<User> getByRole(String roleLabel);
+
+    /**
+     * 根据用户名查用户
+     *
+     * @param username
+     */
+    @Select("select u.*,r.label role_label from user u left join role r on u.role_id = r.id where u.username=#{username}")
+    User selectUserByUsername(String username);
 }

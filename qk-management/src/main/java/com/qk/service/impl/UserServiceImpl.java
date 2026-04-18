@@ -6,15 +6,22 @@ import com.github.pagehelper.PageInfo;
 import com.qk.common.PageResult;
 import com.qk.dto.UserDto;
 import com.qk.entity.User;
+import com.qk.exception.BusinessException;
 import com.qk.mapper.UserMapper;
 import com.qk.service.UserService;
+import com.qk.utils.JwtUtils;
+import com.qk.vo.LoginResultVo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+@Slf4j
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -89,5 +96,48 @@ public class UserServiceImpl implements UserService {
     public List<User> getByRole(String roleLabel) {
         List<User> list = userMapper.getByRole(roleLabel);
         return list;
+    }
+
+    /**
+     * 登录
+     *
+     * @param user
+     * @return
+     */
+    @Override
+    public LoginResultVo login(User user) {
+        //在数据库中查询对应用户的信息
+        User u = userMapper.selectUserByUsername(user.getUsername());
+        //判断用户是否存在
+        if (u == null) {
+            log.info("用户不存在");
+            throw new BusinessException("用户不存在");
+        }
+        //判断密码是否正确
+        String pwd = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
+        if (!u.getPassword().equals(pwd)) {
+            log.info("密码错误");
+            throw new BusinessException("密码错误");
+        }
+        //判断用户状态是否正常
+        if (u.getStatus() != 1) {
+            log.info("用户已停用");
+            throw new BusinessException("用户已停用");
+        }
+        //封装数据对象
+        LoginResultVo loginResultVo = new LoginResultVo();
+        loginResultVo.setId(u.getId());
+        loginResultVo.setUsername(u.getUsername());
+        loginResultVo.setName(u.getName());
+        loginResultVo.setImage(u.getImage());
+        loginResultVo.setRoleLabel(u.getRoleLabel());
+
+        Map<String, Object> tmpMap = new HashMap<>();
+        tmpMap.put("userid", u.getId());
+        tmpMap.put("username", u.getUsername());
+        String token = JwtUtils.generateToken(tmpMap);
+
+        loginResultVo.setToken(token);
+        return loginResultVo;
     }
 }
