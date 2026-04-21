@@ -100,4 +100,7 @@ public class Clue {
 
     @TableField(exist = false)
     private List<ClueTrackRecord> trackRecords;
+
+    @TableField(exist = false)
+    private String record;
 }

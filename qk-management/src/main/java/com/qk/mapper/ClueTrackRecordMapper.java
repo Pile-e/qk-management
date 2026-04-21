@@ -1,7 +1,9 @@
 package com.qk.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.qk.entity.Clue;
+import com.qk.entity.ClueTrackRecord;
+import org.apache.ibatis.annotations.Mapper;
 
-public interface ClueTrackRecordMapper extends BaseMapper<Clue> {
+@Mapper
+public interface ClueTrackRecordMapper extends BaseMapper<ClueTrackRecord> {
 }

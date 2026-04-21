@@ -64,4 +64,11 @@ public class ClueController {
         Clue clue = clueService.getClueById(id);
         return Result.success(clue);
     }
+
+    @PutMapping
+    public Result trackClue(@RequestBody Clue clue) {
+        log.info("线索跟进,clue:{}", clue);
+        clueService.trackClue(clue);
+        return Result.success();
+    }
 }
