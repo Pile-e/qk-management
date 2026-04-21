@@ -1,5 +1,6 @@
 package com.qk.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -93,4 +94,10 @@ public class Clue {
      * 修改时间
      */
     private LocalDateTime updateTime;
+
+    @TableField(exist = false) // 声明当前的属性在数据库中并不存在，不映射数据库字段
+    private String assignName;
+
+    @TableField(exist = false)
+    private List<ClueTrackRecord> trackRecords;
 }

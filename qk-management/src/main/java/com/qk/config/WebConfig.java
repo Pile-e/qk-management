@@ -1,7 +1,6 @@
 package com.qk.config;
 
 
-import com.qk.interceptor.DemoInterceptor;
 import com.qk.interceptor.TokenInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +20,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         // 注册Demo拦截器
 //        registry.addInterceptor(demoInterceptor).addPathPatterns("/**");
-        
+
         // 注册令牌校验拦截器
         registry.addInterceptor(tokenInterceptor).addPathPatterns("/**");
     }

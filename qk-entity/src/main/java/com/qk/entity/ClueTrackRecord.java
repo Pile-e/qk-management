@@ -1,6 +1,5 @@
 package com.qk.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -59,4 +58,9 @@ public class ClueTrackRecord {
      * 创建时间
      */
     private LocalDateTime createTime;
+
+    /**
+     * 跟进人名称
+     */
+    private String assignName;
 }
