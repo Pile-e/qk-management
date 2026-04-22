@@ -1,6 +1,8 @@
 package com.qk.controller;
 
+import com.qk.common.PageResult;
 import com.qk.common.Result;
+import com.qk.dto.ClueDto;
 import com.qk.entity.Clue;
 import com.qk.service.ClueService;
 import lombok.extern.slf4j.Slf4j;
@@ -32,20 +34,32 @@ public class ClueController {
     }
 
     /**
+     * 列表查询
+     *
+     * @param clueDto
+     * @return
+     */
+    @GetMapping
+    public Result clueList(ClueDto clueDto) {
+        PageResult<Clue> pageResult = clueService.clueList(clueDto);
+        return Result.success(pageResult);
+    }
+
+    /**
      * 分配线索
      *
      * @param clueId
      * @param userId
      * @return
      */
-    @PutMapping("/clues/assign/{clueId}/{userId}")
+    @PutMapping("/assign/{clueId}/{userId}")
     public Result assignClue(@PathVariable Integer clueId, @PathVariable Integer userId) {
         log.info("分配线索,clueId:{},userId:{}", clueId, userId);
         //查询线索是否存在
         Clue clue = new Clue();
         clue.setId(clueId);
         clue.setUserId(userId); //分配给指定用户
-        clue.setStatus(1); //待跟进
+        clue.setStatus(2); //待跟进
         clue.setUpdateTime(LocalDateTime.now()); //更新时间
 
         //保存更新后的信息
@@ -65,10 +79,29 @@ public class ClueController {
         return Result.success(clue);
     }
 
+    /**
+     * 线索跟进
+     *
+     * @param clue
+     * @return
+     */
     @PutMapping
     public Result trackClue(@RequestBody Clue clue) {
         log.info("线索跟进,clue:{}", clue);
         clueService.trackClue(clue);
+        return Result.success();
+    }
+
+    /**
+     * 线索转商机
+     *
+     * @param id
+     * @return
+     */
+    @PutMapping("/toBusiness/{id}")
+    public Result toBusiness(@PathVariable Integer id) {
+        log.info("线索转商机,id:{}", id);
+        clueService.toBusiness(id);
         return Result.success();
     }
 }

@@ -22,8 +22,9 @@
         <result property="level" column="level"/>
         <result property="nextTime" column="next_time"/>
         <result property="createTime" column="create_time"/>
-        <result property="updateTime"
-                column="update_time"/><!--coLLection标签用于封装对象中的集合类型的属性--><!--ofType标签用户表示我们集合中的单个对象是什么类型-->
+        <result property="updateTime" column="update_time"/>
+        <!--coLLection标签用于封装对象中的集合类型的属性-->
+        <!--ofType标签用户表示我们集合中的单个对象是什么类型-->
         <collection property="trackRecords" ofType="com.qk.entity.ClueTrackRecord">
             <id property="id" column="ct_id"/>
             <result property="clueId" column="ct_clue_id"/>
@@ -72,5 +73,29 @@
                  left join clue_track_record ct on c.id = ct.clue_id
                  left join user u on ct.user_id = u.id
         where c.id = #{id}
+    </select>
+
+    <select id="queryClueList" resultType="com.qk.entity.Clue">
+        select c.*, u.name as assignName
+        from clue c
+        left join user u on c.user_id = u.id
+        <where>
+            <if test="clueDto.clueId != null">
+                c.id=#{clueDto.clueId}
+            </if>
+            <if test="clueDto.phone != null and clueDto.phone != ''">
+                and c.phone=#{clueDto.phone}
+            </if>
+            <if test="clueDto.status != null">
+                and c.status=#{clueDto.status}
+            </if>
+            <if test="clueDto.channel != null">
+                and c.channel=#{clueDto.channel}
+            </if>
+            <if test="clueDto.assignName != null and clueDto.assignName != ''">
+                and u.name=#{clueDto.assignName}
+            </if>
+        </where>
+        order by c.update_time desc
     </select>
 </mapper>
