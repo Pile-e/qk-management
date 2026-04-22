@@ -98,4 +98,13 @@
         </where>
         order by c.update_time desc
     </select>
+    <select id="getClueOverviewData" resultType="com.qk.vo.OverviewVO">
+        select count(1)                       as clueTotal,
+               count(if(status = 1, 1, null)) as clueWaitAllot,
+               count(if(status = 2, 2, null)) as clueWaitFollow,
+               count(if(status = 3, 3, null)) as clueFollowing,
+               count(if(status = 4, 4, null)) as clueFalse,
+               count(if(status = 5, 5, null)) as clueConvertBusiness
+        from clue;
+    </select>
 </mapper>
