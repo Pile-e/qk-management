@@ -2,11 +2,13 @@ package com.qk.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * 线索和商机统计信息实体类
  */
 @Data
-public class OverviewVO {
+public class OverviewVO implements Serializable {
     private Integer clueTotal; // 总线索数
     private Integer clueWaitAllot; // 待分配线索数量
     private Integer clueWaitFollow; // 待跟进线索数量
