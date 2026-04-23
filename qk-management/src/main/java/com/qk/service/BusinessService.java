@@ -11,4 +11,6 @@ public interface BusinessService extends IService<Business> {
     Business seleteById(Integer id);
 
     void trackBusiness(Business business);
+
+    void toCustomer(Integer id);
 }

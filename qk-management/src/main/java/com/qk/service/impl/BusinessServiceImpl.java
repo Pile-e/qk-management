@@ -6,10 +6,13 @@ import com.qk.common.PageResult;
 import com.qk.dto.BusinessDto;
 import com.qk.entity.Business;
 import com.qk.entity.BusinessTrackRecord;
+import com.qk.entity.Customer;
 import com.qk.mapper.BusinessMapper;
 import com.qk.mapper.BusinessTrackRecordMapper;
+import com.qk.mapper.CustomerMapper;
 import com.qk.service.BusinessService;
 import com.qk.utils.CurrentUserHoler;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +25,8 @@ public class BusinessServiceImpl extends ServiceImpl<BusinessMapper, Business> i
     private BusinessMapper businessMapper;
     @Autowired
     private BusinessTrackRecordMapper businessTrackRecordMapper;
+    @Autowired
+    private CustomerMapper customerMapper;
 
     /**
      * 商机列表查询
@@ -70,5 +75,30 @@ public class BusinessServiceImpl extends ServiceImpl<BusinessMapper, Business> i
         businessTrackRecord.setRecord(business.getRecord());
         businessTrackRecord.setCreateTime(LocalDateTime.now());
         businessTrackRecordMapper.insert(businessTrackRecord);
+    }
+
+    /**
+     * 商机转客户
+     *
+     * @param id
+     */
+    @Override
+    public void toCustomer(Integer id) {
+        //跟进前端数据查询对应数据
+        Business business = this.baseMapper.seleteById(id);
+        //更新商机为转客户状态
+        business.setStatus(5);
+        business.setUpdateTime(LocalDateTime.now());
+        businessMapper.updateById(business);
+
+        //新增一条客户数据
+        Customer customer = new Customer();
+        //把前边对象的属性赋值给后边的 前提条件：两个对象的属性名是相等的
+        BeanUtils.copyProperties(business, customer);
+        customer.setId(null);
+        customer.setBusinessId(business.getId());
+        customer.setCreateTime(LocalDateTime.now());
+        customer.setUpdateTime(LocalDateTime.now());
+        customerMapper.insert(customer);
     }
 }

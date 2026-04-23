@@ -107,4 +107,16 @@ public class BusinessController {
         businessService.updateById(business);
         return Result.success();
     }
+
+    /**
+     * 商机转客户
+     *
+     * @param id
+     * @return
+     */
+    @PostMapping("/toCustomer/{id}")
+    public Result toCustomer(@PathVariable Integer id) {
+        businessService.toCustomer(id);
+        return Result.success();
+    }
 }
