@@ -12,4 +12,6 @@ public interface BusinessMapper extends BaseMapper<Business> {
     OverviewVO getBusinessOverviewData();
 
     Page<Business> businessList(Page<Object> objectPage, BusinessDto businessDto);
+
+    Business seleteById(Integer id);
 }

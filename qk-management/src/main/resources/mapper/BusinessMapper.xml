@@ -37,4 +37,70 @@
         </where>
         order by update_time desc
     </select>
+    <resultMap id="busiMap" type="com.qk.entity.Business">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="phone" property="phone"/>
+        <result column="gender" property="gender"/>
+        <result column="age" property="age"/>
+        <result column="wechat" property="wechat"/>
+        <result column="qq" property="qq"/>
+        <result column="subject" property="subject"/>
+        <result column="course_id" property="courseId"/>
+        <result column="degree" property="degree"/>
+        <result column="job_status" property="jobStatus"/>
+        <result column="channel" property="channel"/>
+        <result column="remark" property="remark"/>
+        <result column="status" property="status"/>
+        <result column="user_id" property="userId"/>
+        <result column="clue_id" property="clueId"/>
+        <result column="next_time" property="nextTime"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <collection property="businessTrackRecords" ofType="com.qk.entity.BusinessTrackRecord">
+            <id column="tr_id" property="id"/>
+            <result column="tr_business_id" property="businessId"/>
+            <result column="tr_user_id" property="userId"/>
+            <result column="tr_track_status" property="trackStatus"/>
+            <result column="tr_key_items" property="keyItems"/>
+            <result column="tr_next_time" property="nextTime"/>
+            <result column="tr_record" property="record"/>
+            <result column="tr_create_time" property="createTime"/>
+        </collection>
+    </resultMap>
+
+    <select id="seleteById" resultMap="busiMap">
+        select b.id,
+               b.name,
+               b.phone,
+               b.gender,
+               b.age,
+               b.wechat,
+               b.qq,
+               b.subject,
+               b.course_id,
+               b.degree,
+               b.job_status,
+               b.channel,
+               b.remark,
+               b.status,
+               b.user_id,
+               b.clue_id,
+               b.next_time,
+               b.create_time,
+               b.update_time,
+               tr.id           tr_id,
+               tr.business_id  tr_business_id,
+               tr.user_id      tr_user_id,
+               tr.track_status tr_track_status,
+               tr.key_items    tr_key_items,
+               tr.next_time    tr_next_time,
+               tr.record       tr_record,
+               tr.create_time  tr_create_time,
+               u.name          assign_name
+        from business b
+                 left join business_track_record tr on b.id = tr.business_id
+                 left join user u on tr.user_id = u.id
+        where b.id = #{id}
+    </select>
 </mapper>

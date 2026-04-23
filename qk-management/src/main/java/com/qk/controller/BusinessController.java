@@ -47,6 +47,13 @@ public class BusinessController {
         return Result.success(pageResult);
     }
 
+    /**
+     * 分配商机
+     *
+     * @param businessId
+     * @param userId
+     * @return
+     */
     @PutMapping("/assign/{businessId}/{userId}")
     public Result allocateBusiness(@PathVariable Integer businessId, @PathVariable Integer userId) {
         log.info("分配商机,businessId:{},userId:{}", businessId, userId);
@@ -62,4 +69,17 @@ public class BusinessController {
         return Result.success();
     }
 
+    /**
+     * 跟进id查询商机
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    public Result seleteById(@PathVariable Integer id) {
+        Business business = businessService.seleteById(id);
+        return Result.success(business);
+    }
+
+    
 }

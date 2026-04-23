@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 商机实体类
@@ -32,5 +33,7 @@ public class Business {
     //新增属性
     @TableField(exist = false)
     private String assignName;
+    @TableField(exist = false)
+    private List<BusinessTrackRecord> businessTrackRecords;
 
 }

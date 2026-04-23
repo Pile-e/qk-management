@@ -26,4 +26,16 @@ public class BusinessServiceImpl extends ServiceImpl<BusinessMapper, Business> i
         Page<Business> page = businessMapper.businessList(new Page<>(businessDto.getPage(), businessDto.getPageSize()), businessDto);
         return new PageResult<>(page.getTotal(), page.getRecords());
     }
+
+    /**
+     * 根据id查询
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public Business seleteById(Integer id) {
+        Business business = businessMapper.seleteById(id);
+        return business;
+    }
 }
