@@ -13,4 +13,28 @@
                count(if(status = 5, 5, null)) as businessConvertCustomer
         from business;
     </select>
+
+    <select id="businessList" resultType="com.qk.entity.Business">
+        select b.*,u.name as assignName
+        from business b
+        left join user u on b.user_id = u.id
+        <where>
+            <if test="businessDto.businessId != null">
+                b.id=#{businessDto.businessId}
+            </if>
+            <if test="businessDto.name != null and businessDto.name!= ''">
+                and b.name like concat('%',#{businessDto.name},'%')
+            </if>
+            <if test="businessDto.phone != null and businessDto.phone != ''">
+                and b.phone like concat('%',#{businessDto.phone},'%')
+            </if>
+            <if test="businessDto.status != null">
+                and b.status=#{businessDto.status}
+            </if>
+            <if test="businessDto.assignName != null and businessDto.assignName!= ''">
+                and u.name like concat ('%',#{businessDto.assignName},'%')
+            </if>
+        </where>
+        order by update_time desc
+    </select>
 </mapper>
