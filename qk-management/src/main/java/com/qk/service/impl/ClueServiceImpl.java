@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.qk.common.PageResult;
 import com.qk.dto.ClueDto;
+import com.qk.dto.MarkFalseClueDto;
 import com.qk.entity.Business;
 import com.qk.entity.Clue;
 import com.qk.entity.ClueTrackRecord;
@@ -105,6 +106,31 @@ public class ClueServiceImpl extends ServiceImpl<ClueMapper, Clue> implements Cl
         business.setCreateTime(LocalDateTime.now());
         business.setUpdateTime(LocalDateTime.now());
         businessMapper.insert(business);
+    }
+
+    /**
+     * 转伪线索
+     *
+     * @param markFalseClueDto
+     * @param id
+     */
+    @Override
+    public void falseClue(MarkFalseClueDto markFalseClueDto, Integer id) {
+        //修改线索状态
+        Clue clue = clueMapper.selectById(id);
+        clue.setStatus(4);
+        clue.setUpdateTime(LocalDateTime.now());
+        clueMapper.updateById(clue);
+
+        //修改跟进记录
+        ClueTrackRecord clueTrackRecord = new ClueTrackRecord();
+        clueTrackRecord.setClueId(clue.getId());
+        clueTrackRecord.setUserId(CurrentUserHoler.getCurrentUser());
+        clueTrackRecord.setType(0);
+        clueTrackRecord.setRecord(markFalseClueDto.getRemark());
+        clueTrackRecord.setFalseReason(markFalseClueDto.getReason());
+        clueTrackRecord.setCreateTime(LocalDateTime.now());
+        clueTrackRecordMapper.insert(clueTrackRecord);
     }
 
 

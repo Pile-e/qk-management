@@ -3,6 +3,7 @@ package com.qk.controller;
 import com.qk.common.PageResult;
 import com.qk.common.Result;
 import com.qk.dto.ClueDto;
+import com.qk.dto.MarkFalseClueDto;
 import com.qk.entity.Clue;
 import com.qk.service.ClueService;
 import lombok.extern.slf4j.Slf4j;
@@ -102,6 +103,18 @@ public class ClueController {
     public Result toBusiness(@PathVariable Integer id) {
         log.info("线索转商机,id:{}", id);
         clueService.toBusiness(id);
+        return Result.success();
+    }
+
+    /**
+     * 转伪线索
+     *
+     * @param id
+     * @return
+     */
+    @PutMapping("/false/{id}")
+    public Result falseClue(MarkFalseClueDto markFalseClueDto, @PathVariable Integer id) {
+        clueService.falseClue(markFalseClueDto, id);
         return Result.success();
     }
 }
