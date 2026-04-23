@@ -46,4 +46,20 @@ public class BusinessController {
         PageResult<Business> pageResult = businessService.businessList(businessDto);
         return Result.success(pageResult);
     }
+
+    @PutMapping("/assign/{businessId}/{userId}")
+    public Result allocateBusiness(@PathVariable Integer businessId, @PathVariable Integer userId) {
+        log.info("分配商机,businessId:{},userId:{}", businessId, userId);
+        //商机是否存在
+        Business business = new Business();
+        business.setId(businessId);
+        business.setUserId(userId); //分配
+        business.setStatus(2); //修改状态
+        business.setUpdateTime(LocalDateTime.now());
+
+        //保存更新后的信息
+        businessService.updateById(business);
+        return Result.success();
+    }
+
 }
