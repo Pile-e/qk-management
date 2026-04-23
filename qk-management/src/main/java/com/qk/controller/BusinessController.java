@@ -93,5 +93,18 @@ public class BusinessController {
         return Result.success();
     }
 
-    
+    /**
+     * 踢回公海
+     *
+     * @param id
+     * @return
+     */
+    @PutMapping("/back/{id}")
+    public Result backSea(@PathVariable Integer id) {
+        Business business = new Business();
+        business.setId(id);
+        business.setStatus(4);
+        businessService.updateById(business);
+        return Result.success();
+    }
 }
