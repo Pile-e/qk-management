@@ -32,8 +32,17 @@ public class Business {
     private LocalDateTime updateTime; // 修改时间
     //新增属性
     @TableField(exist = false)
-    private String assignName;
-    @TableField(exist = false)
-    private List<BusinessTrackRecord> businessTrackRecords;
+    private String assignName; // 归属人名称
 
+    @TableField(exist = false)
+    private List<BusinessTrackRecord> trackRecords; // 商机跟进记录
+
+    @TableField(exist = false)
+    private String trackStatus; // 跟进状态
+
+    @TableField(exist = false)
+    private List<String> keyItems; // 沟通重点
+
+    @TableField(exist = false)
+    private String record; // 沟通纪要
 }

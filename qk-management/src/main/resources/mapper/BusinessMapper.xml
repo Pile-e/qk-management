@@ -57,7 +57,7 @@
         <result column="next_time" property="nextTime"/>
         <result column="create_time" property="createTime"/>
         <result column="update_time" property="updateTime"/>
-        <collection property="businessTrackRecords" ofType="com.qk.entity.BusinessTrackRecord">
+        <collection property="trackRecords" ofType="com.qk.entity.BusinessTrackRecord">
             <id column="tr_id" property="id"/>
             <result column="tr_business_id" property="businessId"/>
             <result column="tr_user_id" property="userId"/>
@@ -66,6 +66,7 @@
             <result column="tr_next_time" property="nextTime"/>
             <result column="tr_record" property="record"/>
             <result column="tr_create_time" property="createTime"/>
+            <result column="assign_name" property="assignName"/>
         </collection>
     </resultMap>
 

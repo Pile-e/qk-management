@@ -81,5 +81,17 @@ public class BusinessController {
         return Result.success(business);
     }
 
+    /**
+     * 跟进商机
+     *
+     * @return
+     */
+    @PutMapping
+    public Result trackBusiness(@RequestBody Business business) {
+        log.info("跟进商机,business:{}", business);
+        businessService.trackBusiness(business);
+        return Result.success();
+    }
+
     
 }
