@@ -84,7 +84,7 @@
                 c.id=#{clueDto.clueId}
             </if>
             <if test="clueDto.phone != null and clueDto.phone != ''">
-                and c.phone like '%${clueQueryDto.phone}%'
+                and c.phone=#{clueDto.phone}
             </if>
             <if test="clueDto.status != null">
                 and c.status=#{clueDto.status}
